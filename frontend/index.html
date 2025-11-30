@@ -3,212 +3,252 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maíz Urbano | Sabor de calle, operación moderna</title>
+    <title>Maíz Urbano | Sistema Operativo Callejero</title>
     <meta
       name="description"
-      content="Maíz Urbano rescata el maíz criollo mexicano con operación moderna. Ordena elotes, esquites y panqué artesanal, conoce nuestras sucursales o únete al equipo."
+      content="Maíz Urbano: operación callejera premium, elote con hoodie, antojos de maíz criollo y modelo listo para escalar."
     />
+    <script>
+      (() => {
+        const stored = localStorage.getItem('maiz-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              maize: {
-                50: '#fffaeb',
-                100: '#fef3c7',
-                300: '#fcd34d',
-                500: '#f59e0b',
-                600: '#d97706',
+              maiz: {
+                amarillo: '#FACC15',
+                dorado: '#FBBF24',
+                hoja: '#14532D',
+                crema: '#FDF7E3',
+                negro: '#0F0F0F',
               },
-              charcoal: '#0f172a',
-              leaf: '#25674e',
             },
             fontFamily: {
-              display: ['"Space Grotesk"', 'sans-serif'],
-              body: ['"Manrope"', 'sans-serif'],
+              heading: ['"Archivo Black"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+              sans: ['Inter', 'sans-serif'],
             },
             boxShadow: {
-              glow: '0 20px 80px rgba(0,0,0,0.18)',
+              glow: '0 25px 80px rgba(0,0,0,0.35)',
             },
           },
         },
       };
     </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <style>
       body {
-        background: radial-gradient(circle at 20% 20%, #fef3c7 0, rgba(255, 255, 255, 0) 30%),
-          radial-gradient(circle at 80% 0%, #bbf7d0 0, rgba(255, 255, 255, 0) 30%),
-          #f8fafc;
-        color: #0f172a;
-        font-family: "Manrope", system-ui, -apple-system, sans-serif;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background: radial-gradient(circle at 15% 20%, rgba(250, 204, 21, 0.1), transparent 25%),
+          radial-gradient(circle at 85% 0%, rgba(20, 83, 45, 0.08), transparent 25%),
+          #fdf7e3;
+        color: #0f0f0f;
+      }
+      .dark body {
+        background: radial-gradient(circle at 30% 10%, rgba(250, 204, 21, 0.12), transparent 22%),
+          radial-gradient(circle at 80% 20%, rgba(20, 83, 45, 0.18), transparent 30%),
+          #0f0f0f;
+        color: #fdf7e3;
       }
     </style>
   </head>
-  <body class="min-h-screen text-slate-900">
-    <header class="sticky top-0 z-50 backdrop-blur bg-white/80 shadow-md">
+  <body class="min-h-screen bg-maiz-crema text-maiz-negro transition-colors duration-300 dark:bg-maiz-negro dark:text-maiz-crema">
+    <header class="sticky top-0 z-50 border-b border-maiz-amarillo/30 bg-maiz-crema/90 backdrop-blur dark:bg-maiz-negro/90">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 lg:px-8">
-        <div class="flex items-center gap-3">
-          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-maize-100 text-2xl font-semibold text-charcoal shadow">
-            🌽
+        <a href="#top" class="flex items-center gap-3">
+          <img
+            src="assets/Logo Original Maiz Urbano.png"
+            alt="Logo Maíz Urbano"
+            class="h-12 w-auto drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] transition duration-300 hover:scale-105"
+          />
+          <div class="hidden sm:block">
+            <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-amarillo">Maíz Urbano</p>
+            <p class="font-heading text-lg leading-none">Sistema Operativo Callejero</p>
           </div>
-          <div>
-            <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Maíz Urbano</p>
-            <p class="font-display text-lg font-semibold text-charcoal">Sabor de calle, operación moderna</p>
-          </div>
-        </div>
-        <nav class="hidden items-center gap-6 text-sm font-semibold text-slate-700 md:flex">
-          <a href="#sucursales" class="hover:text-charcoal">Sucursales</a>
-          <a href="#menu" class="hover:text-charcoal">Menú</a>
-          <a href="#valores" class="hover:text-charcoal">Valores</a>
-          <a href="#empleo" class="hover:text-charcoal">Empleo</a>
-          <a href="#franquicias" class="hover:text-charcoal">Franquicias</a>
+        </a>
+        <nav class="hidden items-center gap-6 text-xs font-semibold uppercase tracking-widest sm:flex">
+          <a href="#sucursales" class="transition hover:text-maiz-amarillo">Sucursales</a>
+          <a href="#menu" class="transition hover:text-maiz-amarillo">Menú</a>
+          <a href="#valores" class="transition hover:text-maiz-amarillo">Valores</a>
+          <a href="#empleo" class="transition hover:text-maiz-amarillo">Empleo</a>
+          <a href="#franquicias" class="transition hover:text-maiz-amarillo">Franquicias</a>
         </nav>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
+          <button
+            id="theme-toggle"
+            type="button"
+            class="hidden rounded-full border border-maiz-amarillo/40 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-maiz-amarillo transition hover:-translate-y-0.5 hover:border-maiz-amarillo/80 sm:inline-flex"
+            aria-label="Alternar modo claro/oscuro"
+          >
+            Dark/Light
+          </button>
           <a
-            href="https://wa.me/525511223344"
-            class="hidden rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-charcoal transition hover:border-maize-500 hover:text-maize-600 md:inline-flex"
+            href="https://wa.me/525511223344?text=Hola%20quiero%20pedir"
+            class="inline-flex items-center gap-2 rounded-full bg-maiz-amarillo px-4 py-2 text-xs font-heading uppercase tracking-widest text-maiz-negro shadow-glow transition hover:-translate-y-0.5 hover:bg-maiz-dorado"
           >
             Ordena aquí
-          </a>
-          <a
-            href="#menu"
-            class="inline-flex rounded-full bg-charcoal px-4 py-2 text-sm font-semibold text-white shadow hover:-translate-y-0.5 hover:shadow-lg transition"
-          >
-            Ver menú
           </a>
         </div>
       </div>
     </header>
 
-    <main>
+    <main id="top">
       <section class="relative overflow-hidden">
-        <div class="absolute inset-0">
-          <div class="absolute right-[-12%] top-[-10%] h-80 w-80 rounded-full bg-maize-100 blur-3xl"></div>
-          <div class="absolute left-[-10%] bottom-[-15%] h-96 w-96 rounded-full bg-green-100 blur-3xl"></div>
-        </div>
-        <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:px-8">
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-zinc-950 via-yellow-900/20 to-transparent opacity-90 dark:opacity-70"></div>
+        <div class="absolute right-[-10%] top-[-10%] h-80 w-80 rounded-full bg-maiz-amarillo/10 blur-3xl"></div>
+        <div class="absolute left-[-15%] bottom-[-15%] h-96 w-96 rounded-full bg-maiz-hoja/20 blur-3xl"></div>
+        <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.1fr,0.9fr] lg:px-8">
           <div class="space-y-6">
-            <span class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-charcoal shadow">
-              Hecho con maíz criollo
-            </span>
-            <h1 class="font-display text-4xl font-bold leading-tight text-charcoal sm:text-5xl lg:text-6xl">
-              Maíz Urbano
+            <div class="flex items-center gap-3">
+              <img
+                src="assets/Logo Original Maiz Urbano.png"
+                alt="Logo Maíz Urbano"
+                class="h-14 w-auto drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] transition duration-300 hover:scale-105"
+              />
+              <span class="rounded-full border border-maiz-amarillo/60 bg-maiz-crema/70 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.3em] text-maiz-hoja shadow dark:bg-maiz-negro/70">
+                Operación urbana
+              </span>
+            </div>
+            <h1 class="font-heading text-4xl leading-tight sm:text-5xl lg:text-6xl">
+              Elote con hoodie.<br />
+              Menús replicables.<br />
+              Servicio listo para escalar.
             </h1>
-            <p class="max-w-2xl text-lg leading-relaxed text-slate-700">
-              Rescatamos el maíz criollo mexicano con recetas de antojo, operación replicable y un servicio ágil listo
-              para escalar. Pide tus elotes y esquites o conoce cómo franquiciar.
+            <p class="max-w-2xl text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+              Plataforma Maíz Urbano: recetas de maíz criollo, flujos estandarizados y equipo entrenado para operar en
+              calle o punto fijo. Entrega rápida, sabor de barrio, control de calidad premium.
             </p>
             <div class="flex flex-wrap gap-4">
               <a
-                href="https://wa.me/525511223344"
-                class="inline-flex items-center justify-center gap-2 rounded-full bg-maize-500 px-6 py-3 text-base font-semibold text-charcoal shadow-glow transition hover:-translate-y-1 hover:bg-maize-300"
+                href="https://wa.me/525511223344?text=Hola%20quiero%20pedir"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-maiz-amarillo px-6 py-3 text-sm font-heading uppercase tracking-widest text-maiz-negro shadow-glow transition hover:-translate-y-1 hover:bg-maiz-dorado"
               >
-                Ordena aquí
-                <span aria-hidden="true">→</span>
+                Ordenar ahora <span aria-hidden="true">↗</span>
               </a>
               <a
                 href="#franquicias"
-                class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-base font-semibold text-charcoal shadow transition hover:-translate-y-1 hover:border-charcoal"
+                class="inline-flex items-center justify-center gap-2 rounded-full border border-maiz-amarillo/60 bg-maiz-crema/70 px-6 py-3 text-sm font-heading uppercase tracking-widest text-maiz-amarillo transition hover:-translate-y-1 hover:border-maiz-amarillo hover:text-maiz-negro hover:bg-maiz-amarillo dark:bg-maiz-negro/70"
               >
                 ¿Quieres franquiciar?
               </a>
             </div>
-            <div class="flex flex-wrap gap-6 text-sm text-slate-600">
-              <div class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-maize-500"></span>
-                Operación estandarizada
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-leaf"></span>
-                Ingredientes de origen responsable
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-charcoal"></span>
-                Entrega en sucursal o apps
-              </div>
+            <div class="flex flex-wrap gap-4 text-[12px] font-mono uppercase tracking-[0.25em] text-zinc-700 dark:text-zinc-300">
+              <span class="inline-flex items-center gap-2 rounded-full bg-maiz-amarillo/20 px-3 py-1 text-maiz-negro dark:text-maiz-crema">SOP + Capacitación</span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-maiz-hoja/20 px-3 py-1 text-maiz-hoja">Origen responsable</span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-maiz-crema/60 px-3 py-1 text-maiz-negro dark:bg-maiz-negro/40 dark:text-maiz-crema">Listo para delivery</span>
             </div>
           </div>
           <div class="relative">
-            <div class="absolute inset-0 -left-6 -top-6 rounded-3xl bg-white/70 shadow-glow"></div>
-            <img
-              src="assets/hero.jpg"
-              alt="Elotes y esquites listos para servir"
-              class="relative w-full rounded-3xl object-cover shadow-2xl"
-            />
-            <div
-              class="absolute -bottom-8 left-6 rounded-2xl bg-white/90 px-5 py-4 text-sm font-semibold text-charcoal shadow-lg"
-            >
-              Listos para pickup o entrega en menos de 15 minutos
+            <div class="absolute inset-0 -left-6 -top-6 rounded-3xl bg-maiz-crema/70 shadow-glow ring-1 ring-maiz-amarillo/30 dark:bg-zinc-900/60"></div>
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-maiz-hoja/40 p-6 shadow-2xl ring-1 ring-maiz-amarillo/25">
+              <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-yellow-900/20 to-transparent mix-blend-multiply"></div>
+              <img
+                src="assets/elote-hoodie.svg"
+                alt="Mascota elote con hoodie Maíz Urbano"
+                class="relative mx-auto w-full max-w-[420px] drop-shadow-[0_25px_60px_rgba(250,204,21,0.2)] transition duration-500 hover:scale-105"
+              />
+              <div class="mt-4 flex flex-wrap items-center gap-3 text-xs font-mono uppercase tracking-[0.3em] text-maiz-amarillo">
+                <span class="rounded-full bg-maiz-negro/70 px-3 py-1 text-maiz-amarillo ring-1 ring-maiz-amarillo/40">Modo noche listo</span>
+                <span class="rounded-full bg-maiz-hoja/40 px-3 py-1 text-maiz-crema ring-1 ring-maiz-amarillo/30">Mascota Elote-Hoodie</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="sucursales" class="bg-white/70 py-16">
+      <section id="sucursales" class="bg-white/90 py-16 dark:bg-zinc-900/60">
         <div class="mx-auto max-w-6xl px-6 lg:px-8">
           <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Nuestras Sucursales</p>
-              <h2 class="font-display text-3xl font-bold text-charcoal sm:text-4xl">Cerca de ti</h2>
-              <p class="mt-2 max-w-2xl text-slate-700">
-                Operación replicable con equipos entrenados, listo para abrir nuevas ubicaciones y delivery rápido.
+              <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-hoja">Sucursales</p>
+              <h2 class="font-heading text-3xl sm:text-4xl">Cerca de ti, operando como sistema</h2>
+              <p class="mt-2 max-w-2xl text-zinc-700 dark:text-zinc-300">
+                Equipos entrenados, recetas calibradas y tiempos controlados para delivery y pickup.
               </p>
             </div>
             <a
-              href="https://wa.me/525511223344"
-              class="inline-flex items-center gap-2 rounded-full bg-charcoal px-5 py-3 text-sm font-semibold text-white shadow hover:-translate-y-0.5 transition"
+              href="https://wa.me/525511223344?text=Hola%20quiero%20pedir"
+              class="inline-flex items-center gap-2 rounded-full bg-maiz-amarillo px-5 py-3 text-xs font-heading uppercase tracking-widest text-maiz-negro shadow-glow transition hover:-translate-y-0.5 hover:bg-maiz-dorado"
             >
               Pedir ahora
             </a>
           </div>
           <div class="grid gap-6 lg:grid-cols-5 lg:items-start">
             <div class="grid gap-4 lg:col-span-3">
-              <article class="rounded-2xl bg-white p-5 shadow-md ring-1 ring-slate-100">
+              <article class="rounded-2xl bg-maiz-crema/90 p-5 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/60">
                 <div class="flex items-center justify-between">
-                  <h3 class="font-display text-xl font-semibold text-charcoal">Roma Norte</h3>
-                  <span class="rounded-full bg-maize-100 px-3 py-1 text-xs font-semibold text-charcoal">CDMX</span>
+                  <h3 class="font-heading text-xl">Roma Norte</h3>
+                  <span class="rounded-full bg-maiz-amarillo/20 px-3 py-1 text-xs font-mono uppercase tracking-[0.2em] text-maiz-hoja">
+                    CDMX
+                  </span>
                 </div>
-                <p class="mt-2 text-sm text-slate-600">Calle Colima 145, Roma Norte, 06700</p>
-                <p class="text-sm text-slate-600">Lunes a domingo · 12:00 - 23:00</p>
-                <p class="text-sm text-slate-600">Tel: <a href="tel:+525555551111" class="underline">55 5555 1111</a></p>
-                <a href="https://www.ubereats.com" class="mt-3 inline-flex text-sm font-semibold text-charcoal hover:text-maize-600">
+                <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Calle Colima 145, Roma Norte, 06700</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">Lunes a domingo · 12:00 - 23:00</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">
+                  Tel: <a href="tel:+525555551111" class="underline decoration-maiz-amarillo decoration-2 underline-offset-4">55 5555 1111</a>
+                </p>
+                <a
+                  href="https://www.ubereats.com"
+                  class="mt-3 inline-flex text-sm font-semibold text-maiz-amarillo transition hover:text-maiz-dorado"
+                >
                   Pide por Uber Eats →
                 </a>
               </article>
-              <article class="rounded-2xl bg-white p-5 shadow-md ring-1 ring-slate-100">
+              <article class="rounded-2xl bg-maiz-crema/90 p-5 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/60">
                 <div class="flex items-center justify-between">
-                  <h3 class="font-display text-xl font-semibold text-charcoal">Condesa</h3>
-                  <span class="rounded-full bg-maize-100 px-3 py-1 text-xs font-semibold text-charcoal">CDMX</span>
+                  <h3 class="font-heading text-xl">Condesa</h3>
+                  <span class="rounded-full bg-maiz-amarillo/20 px-3 py-1 text-xs font-mono uppercase tracking-[0.2em] text-maiz-hoja">
+                    CDMX
+                  </span>
                 </div>
-                <p class="mt-2 text-sm text-slate-600">Av. Tamaulipas 89, Hipódromo, 06100</p>
-                <p class="text-sm text-slate-600">Martes a domingo · 13:00 - 22:00</p>
-                <p class="text-sm text-slate-600">Tel: <a href="tel:+525566661111" class="underline">55 6666 1111</a></p>
-                <a href="https://www.ubereats.com" class="mt-3 inline-flex text-sm font-semibold text-charcoal hover:text-maize-600">
+                <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Av. Tamaulipas 89, Hipódromo, 06100</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">Martes a domingo · 13:00 - 22:00</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">
+                  Tel: <a href="tel:+525566661111" class="underline decoration-maiz-amarillo decoration-2 underline-offset-4">55 6666 1111</a>
+                </p>
+                <a
+                  href="https://www.ubereats.com"
+                  class="mt-3 inline-flex text-sm font-semibold text-maiz-amarillo transition hover:text-maiz-dorado"
+                >
                   Pide por Uber Eats →
                 </a>
               </article>
-              <article class="rounded-2xl bg-white p-5 shadow-md ring-1 ring-slate-100">
+              <article class="rounded-2xl bg-maiz-crema/90 p-5 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/60">
                 <div class="flex items-center justify-between">
-                  <h3 class="font-display text-xl font-semibold text-charcoal">Satélite</h3>
-                  <span class="rounded-full bg-maize-100 px-3 py-1 text-xs font-semibold text-charcoal">Edomex</span>
+                  <h3 class="font-heading text-xl">Satélite</h3>
+                  <span class="rounded-full bg-maiz-amarillo/20 px-3 py-1 text-xs font-mono uppercase tracking-[0.2em] text-maiz-hoja">
+                    Edomex
+                  </span>
                 </div>
-                <p class="mt-2 text-sm text-slate-600">Circuito Novelistas 22, Cd. Satélite</p>
-                <p class="text-sm text-slate-600">Jueves a domingo · 14:00 - 22:30</p>
-                <p class="text-sm text-slate-600">Tel: <a href="tel:+525577771111" class="underline">55 7777 1111</a></p>
-                <a href="https://www.ubereats.com" class="mt-3 inline-flex text-sm font-semibold text-charcoal hover:text-maize-600">
+                <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Circuito Novelistas 22, Cd. Satélite</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">Jueves a domingo · 14:00 - 22:30</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">
+                  Tel: <a href="tel:+525577771111" class="underline decoration-maiz-amarillo decoration-2 underline-offset-4">55 7777 1111</a>
+                </p>
+                <a
+                  href="https://www.ubereats.com"
+                  class="mt-3 inline-flex text-sm font-semibold text-maiz-amarillo transition hover:text-maiz-dorado"
+                >
                   Pide por Uber Eats →
                 </a>
               </article>
             </div>
             <div class="lg:col-span-2">
-              <div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-slate-100">
+              <div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-maiz-amarillo/30">
                 <iframe
                   title="Mapa Maíz Urbano"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.4059445421786!2d-99.16807332399554!3d19.437007941289033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff367e80f531%3A0x8c88c2552eaa7c44!2sColima%20145%2C%20Roma%20Nte.%2C%20Cuauht%C3%A9moc%2C%2006700%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx"
@@ -227,87 +267,109 @@
         <div class="mx-auto max-w-6xl px-6 lg:px-8">
           <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Menú</p>
-              <h2 class="font-display text-3xl font-bold text-charcoal sm:text-4xl">Antojos estrella</h2>
-              <p class="mt-2 max-w-2xl text-slate-700">Maíz criollo, salsas de casa y toppings listos para servicio rápido.</p>
+              <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-hoja">Menú</p>
+              <h2 class="font-heading text-3xl sm:text-4xl">Antojos estrella</h2>
+              <p class="mt-2 max-w-2xl text-zinc-700 dark:text-zinc-300">
+                Maíz criollo, salsas de casa y empaques de entrega segura.
+              </p>
             </div>
             <a
-              href="https://wa.me/525511223344"
-              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-charcoal shadow hover:-translate-y-0.5 hover:border-maize-500 transition"
+              href="https://wa.me/525511223344?text=Hola%20quiero%20pedir"
+              class="inline-flex items-center gap-2 rounded-full border border-maiz-amarillo/60 bg-maiz-crema/80 px-5 py-3 text-xs font-heading uppercase tracking-widest text-maiz-amarillo shadow transition hover:-translate-y-0.5 hover:border-maiz-amarillo hover:bg-maiz-amarillo hover:text-maiz-negro dark:bg-maiz-negro/70"
             >
               Ordenar por WhatsApp
             </a>
           </div>
           <div class="grid gap-6 md:grid-cols-3">
-            <article class="group relative overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-100">
-              <img src="assets/elote-montado.jpg" alt="Elote montado" class="h-52 w-full object-cover transition duration-500 group-hover:scale-105" />
+            <article class="group relative overflow-hidden rounded-2xl bg-maiz-crema/90 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-900/70">
+              <img
+                src="assets/elote-montado.jpg"
+                alt="Elote montado"
+                class="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
+              />
               <div class="space-y-3 p-5">
                 <div class="flex items-center justify-between">
-                  <h3 class="font-display text-xl font-semibold text-charcoal">Elote Montado</h3>
-                  <span class="rounded-full bg-maize-100 px-3 py-1 text-xs font-semibold text-charcoal">$75</span>
+                  <h3 class="font-heading text-xl">Elote Montado</h3>
+                  <span class="rounded-full bg-maiz-amarillo/20 px-3 py-1 text-xs font-mono uppercase tracking-[0.2em] text-maiz-hoja">
+                    $75
+                  </span>
                 </div>
-                <p class="text-sm text-slate-600">
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">
                   Grano tierno, mayonesa con limón, queso cotija, polvo de chile, toque de mantequilla ahumada.
                 </p>
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Listo en 3 minutos</p>
+                <p class="text-[11px] font-mono uppercase tracking-[0.25em] text-maiz-amarillo">Listo en 3 minutos</p>
               </div>
             </article>
-            <article class="group relative overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-100">
-              <img src="assets/esquites.jpg" alt="Esquites" class="h-52 w-full object-cover transition duration-500 group-hover:scale-105" />
+            <article class="group relative overflow-hidden rounded-2xl bg-maiz-crema/90 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-900/70">
+              <img
+                src="assets/esquites.jpg"
+                alt="Esquites"
+                class="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
+              />
               <div class="space-y-3 p-5">
                 <div class="flex items-center justify-between">
-                  <h3 class="font-display text-xl font-semibold text-charcoal">Esquites</h3>
-                  <span class="rounded-full bg-maize-100 px-3 py-1 text-xs font-semibold text-charcoal">$68</span>
+                  <h3 class="font-heading text-xl">Esquites</h3>
+                  <span class="rounded-full bg-maiz-amarillo/20 px-3 py-1 text-xs font-mono uppercase tracking-[0.2em] text-maiz-hoja">
+                    $68
+                  </span>
                 </div>
-                <p class="text-sm text-slate-600">
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">
                   Caldo con epazote, granos salteados, queso fresco, serrano tatemado, mayonesa de chipotle opcional.
                 </p>
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Entrega sin derrames</p>
+                <p class="text-[11px] font-mono uppercase tracking-[0.25em] text-maiz-amarillo">Entrega sin derrames</p>
               </div>
             </article>
-            <article class="group relative overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-slate-100">
-              <img src="assets/panque-elote.jpg" alt="Panqué de elote" class="h-52 w-full object-cover transition duration-500 group-hover:scale-105" />
+            <article class="group relative overflow-hidden rounded-2xl bg-maiz-crema/90 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-900/70">
+              <img
+                src="assets/panque-elote.jpg"
+                alt="Panqué de elote"
+                class="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
+              />
               <div class="space-y-3 p-5">
                 <div class="flex items-center justify-between">
-                  <h3 class="font-display text-xl font-semibold text-charcoal">Panqué de Elote</h3>
-                  <span class="rounded-full bg-maize-100 px-3 py-1 text-xs font-semibold text-charcoal">$85</span>
+                  <h3 class="font-heading text-xl">Panqué de Elote</h3>
+                  <span class="rounded-full bg-maiz-amarillo/20 px-3 py-1 text-xs font-mono uppercase tracking-[0.2em] text-maiz-hoja">
+                    $85
+                  </span>
                 </div>
-                <p class="text-sm text-slate-600">
+                <p class="text-sm text-zinc-700 dark:text-zinc-300">
                   Panqué húmedo de maíz criollo, vainilla de Papantla, crumble de pepitas y glaseado de piloncillo.
                 </p>
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Perfecto para compartir</p>
+                <p class="text-[11px] font-mono uppercase tracking-[0.25em] text-maiz-amarillo">Perfecto para compartir</p>
               </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="valores" class="bg-white/70 py-16">
+      <section id="valores" class="bg-white/90 py-16 dark:bg-zinc-900/60">
         <div class="mx-auto max-w-6xl px-6 lg:px-8">
           <div class="mb-10">
-            <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Nuestros Valores</p>
-            <h2 class="font-display text-3xl font-bold text-charcoal sm:text-4xl">Tradición + impacto + escala</h2>
-            <p class="mt-2 max-w-3xl text-slate-700">
+            <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-hoja">Valores</p>
+            <h2 class="font-heading text-3xl sm:text-4xl">Tradición, impacto y escala técnica</h2>
+            <p class="mt-2 max-w-3xl text-zinc-700 dark:text-zinc-300">
               Operamos con estándares de restaurante rápido sin perder el corazón de la cocina callejera mexicana.
             </p>
           </div>
           <div class="grid gap-6 md:grid-cols-3">
-            <div class="rounded-2xl bg-white p-6 shadow-md ring-1 ring-slate-100">
-              <h3 class="font-display text-xl font-semibold text-charcoal">Misión</h3>
-              <p class="mt-2 text-sm text-slate-600">
-                Llevar el maíz criollo a cada esquina de la ciudad con recetas auténticas, servicio veloz y calidad consistente.
+            <div class="rounded-2xl bg-maiz-crema/90 p-6 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/60">
+              <h3 class="font-heading text-xl">Misión</h3>
+              <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
+                Llevar el maíz criollo a cada esquina de la ciudad con recetas auténticas, servicio veloz y calidad
+                consistente.
               </p>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-md ring-1 ring-slate-100">
-              <h3 class="font-display text-xl font-semibold text-charcoal">Visión</h3>
-              <p class="mt-2 text-sm text-slate-600">
+            <div class="rounded-2xl bg-maiz-crema/90 p-6 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/60">
+              <h3 class="font-heading text-xl">Visión</h3>
+              <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
                 Ser la marca líder de antojitos de maíz en Latinoamérica con un modelo replicable y tecnología operativa.
               </p>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-md ring-1 ring-slate-100">
-              <h3 class="font-display text-xl font-semibold text-charcoal">Valores</h3>
-              <p class="mt-2 text-sm text-slate-600">
-                Tradición culinaria, impacto social para productores, desperdicio mínimo y entrenamiento continuo en cada punto de venta.
+            <div class="rounded-2xl bg-maiz-crema/90 p-6 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/60">
+              <h3 class="font-heading text-xl">Valores</h3>
+              <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
+                Tradición culinaria, impacto social para productores, desperdicio mínimo y entrenamiento continuo en cada
+                punto de venta.
               </p>
             </div>
           </div>
@@ -318,60 +380,61 @@
         <div class="mx-auto max-w-6xl px-6 lg:px-8">
           <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
-              <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Oferta de Empleo</p>
-              <h2 class="font-display text-3xl font-bold text-charcoal sm:text-4xl">Únete a nuestro equipo</h2>
-              <p class="mt-3 text-slate-700">
+              <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-hoja">Oferta de empleo</p>
+              <h2 class="font-heading text-3xl sm:text-4xl">Únete a nuestro equipo</h2>
+              <p class="mt-3 text-zinc-700 dark:text-zinc-300">
                 Buscamos talento operativo y líderes de sucursal que quieran crecer con un modelo sólido y humano.
               </p>
-              <ul class="mt-4 grid gap-2 text-sm text-slate-600">
-                <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-maize-500"></span>Capacitación pagada</li>
-                <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-maize-500"></span>Bonos por desempeño y puntualidad</li>
-                <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-maize-500"></span>Plan de crecimiento a gerente</li>
+              <ul class="mt-4 grid gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+                <li class="flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-maiz-amarillo"></span> Capacitación pagada
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-maiz-amarillo"></span> Bonos por desempeño y puntualidad
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-maiz-amarillo"></span> Plan de crecimiento a gerente
+                </li>
               </ul>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-100">
-              <form
-                action="mailto:empleo@maizurbano.mx"
-                method="post"
-                enctype="text/plain"
-                class="space-y-4"
-              >
+            <div class="rounded-2xl bg-maiz-crema/90 p-6 shadow-lg ring-1 ring-maiz-amarillo/25 dark:bg-zinc-950/70">
+              <form action="mailto:empleo@maizurbano.mx" method="post" enctype="text/plain" class="space-y-4">
                 <div>
-                  <label for="nombre" class="text-sm font-semibold text-charcoal">Nombre</label>
+                  <label for="nombre" class="text-sm font-semibold text-maiz-negro dark:text-maiz-crema">Nombre</label>
                   <input
                     type="text"
                     id="nombre"
                     name="Nombre"
                     placeholder="Tu nombre completo"
-                    class="mt-2 w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-charcoal focus:ring-charcoal"
+                    class="mt-2 w-full rounded-xl border-maiz-amarillo/40 bg-white/70 px-4 py-3 text-sm text-maiz-negro focus:border-maiz-amarillo focus:ring-maiz-amarillo dark:bg-zinc-900 dark:text-maiz-crema"
                     required
                   />
                 </div>
                 <div>
-                  <label for="email" class="text-sm font-semibold text-charcoal">Email</label>
+                  <label for="email" class="text-sm font-semibold text-maiz-negro dark:text-maiz-crema">Email</label>
                   <input
                     type="email"
                     id="email"
                     name="Email"
                     placeholder="tu@correo.com"
-                    class="mt-2 w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-charcoal focus:ring-charcoal"
+                    class="mt-2 w-full rounded-xl border-maiz-amarillo/40 bg-white/70 px-4 py-3 text-sm text-maiz-negro focus:border-maiz-amarillo focus:ring-maiz-amarillo dark:bg-zinc-900 dark:text-maiz-crema"
                     required
                   />
                 </div>
                 <div>
-                  <label for="mensaje" class="text-sm font-semibold text-charcoal">Mensaje</label>
+                  <label for="mensaje" class="text-sm font-semibold text-maiz-negro dark:text-maiz-crema">Mensaje</label>
                   <textarea
                     id="mensaje"
                     name="Mensaje"
                     rows="4"
                     placeholder="Cuéntanos tu experiencia y disponibilidad"
-                    class="mt-2 w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-charcoal focus:ring-charcoal"
+                    class="mt-2 w-full rounded-xl border-maiz-amarillo/40 bg-white/70 px-4 py-3 text-sm text-maiz-negro focus:border-maiz-amarillo focus:ring-maiz-amarillo dark:bg-zinc-900 dark:text-maiz-crema"
                     required
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  class="w-full rounded-xl bg-charcoal px-6 py-3 text-sm font-semibold text-white shadow hover:-translate-y-0.5 transition"
+                  class="w-full rounded-xl bg-maiz-amarillo px-6 py-3 text-sm font-heading uppercase tracking-widest text-maiz-negro shadow-lg transition hover:-translate-y-0.5 hover:bg-maiz-dorado"
                 >
                   Enviar solicitud
                 </button>
@@ -381,18 +444,18 @@
         </div>
       </section>
 
-      <section id="franquicias" class="bg-charcoal py-16 text-white">
+      <section id="franquicias" class="bg-zinc-950 py-16 text-maiz-crema">
         <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
-            <p class="text-xs uppercase tracking-[0.2em] text-maize-100">Franquicias</p>
-            <h2 class="font-display text-3xl font-bold sm:text-4xl">Escala Maíz Urbano en tu ciudad</h2>
-            <p class="mt-3 max-w-3xl text-slate-200">
+            <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-amarillo">Franquicias</p>
+            <h2 class="font-heading text-3xl sm:text-4xl">Escala Maíz Urbano en tu ciudad</h2>
+            <p class="mt-3 max-w-3xl text-zinc-300">
               Modelos modulares, manuales listos y soporte operativo continuo. Hagamos crecer el maíz criollo juntos.
             </p>
           </div>
           <a
             href="mailto:franquicias@maizurbano.mx"
-            class="inline-flex items-center gap-2 rounded-full bg-maize-300 px-6 py-3 text-sm font-semibold text-charcoal shadow-lg hover:-translate-y-1 transition"
+            class="inline-flex items-center gap-2 rounded-full bg-maiz-amarillo px-6 py-3 text-sm font-heading uppercase tracking-widest text-maiz-negro shadow-glow transition hover:-translate-y-1 hover:bg-maiz-dorado"
           >
             ¿Quieres franquiciar?
           </a>
@@ -400,41 +463,74 @@
       </section>
     </main>
 
-    <footer class="bg-white/80 py-10">
+    <footer class="bg-maiz-crema/95 py-10 text-maiz-negro dark:bg-zinc-950 dark:text-maiz-crema">
       <div class="mx-auto max-w-6xl px-6 lg:px-8">
         <div class="grid gap-8 md:grid-cols-4">
-          <div class="md:col-span-2 space-y-3">
-            <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Maíz Urbano</p>
-            <p class="font-display text-xl font-semibold text-charcoal">Tradición callejera, operación moderna.</p>
-            <div class="flex flex-wrap gap-3 text-sm text-slate-700">
-              <a href="tel:+525511223344" class="underline">Tel: 55 1122 3344</a>
-              <a href="mailto:hola@maizurbano.mx" class="underline">hola@maizurbano.mx</a>
+          <div class="space-y-3 md:col-span-2">
+            <p class="font-mono text-xs uppercase tracking-[0.3em] text-maiz-hoja">Maíz Urbano</p>
+            <p class="font-heading text-xl">Tradición callejera, operación moderna.</p>
+            <div class="flex flex-wrap gap-3 text-sm">
+              <a href="tel:+525511223344" class="underline decoration-maiz-amarillo decoration-2 underline-offset-4">Tel: 55 1122 3344</a>
+              <a href="mailto:hola@maizurbano.mx" class="underline decoration-maiz-amarillo decoration-2 underline-offset-4">hola@maizurbano.mx</a>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-charcoal">Redes</h3>
-            <ul class="mt-3 space-y-2 text-sm text-slate-700">
-              <li><a href="#" class="hover:text-charcoal">Instagram</a></li>
-              <li><a href="#" class="hover:text-charcoal">TikTok</a></li>
-              <li><a href="#" class="hover:text-charcoal">Facebook</a></li>
+            <h3 class="font-heading text-sm uppercase tracking-widest">Redes</h3>
+            <ul class="mt-3 space-y-2 text-sm">
+              <li>
+                <a href="https://instagram.com/maizurbano" class="inline-flex items-center gap-2 transition hover:text-maiz-amarillo">
+                  <span class="h-4 w-4 rounded-full bg-maiz-amarillo"></span> Instagram
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@maizurbano" class="inline-flex items-center gap-2 transition hover:text-maiz-amarillo">
+                  <span class="h-4 w-4 rounded-full bg-maiz-amarillo"></span> TikTok
+                </a>
+              </li>
+              <li>
+                <a href="https://facebook.com/maizurbano" class="inline-flex items-center gap-2 transition hover:text-maiz-amarillo">
+                  <span class="h-4 w-4 rounded-full bg-maiz-amarillo"></span> Facebook
+                </a>
+              </li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-charcoal">Legal</h3>
-            <ul class="mt-3 space-y-2 text-sm text-slate-700">
-              <li><a href="#" class="hover:text-charcoal">Aviso de privacidad</a></li>
-              <li><a href="#" class="hover:text-charcoal">Términos del servicio</a></li>
+            <h3 class="font-heading text-sm uppercase tracking-widest">Legal</h3>
+            <ul class="mt-3 space-y-2 text-sm">
+              <li><a href="#" class="transition hover:text-maiz-amarillo">Aviso de privacidad</a></li>
+              <li><a href="#" class="transition hover:text-maiz-amarillo">Términos del servicio</a></li>
             </ul>
           </div>
         </div>
-        <div class="mt-8 border-t border-slate-200 pt-4 text-sm text-slate-600">
-          © <span id="year"></span> Maíz Urbano. Todos los derechos reservados.
+        <div class="mt-8 border-t border-maiz-amarillo/30 pt-4 text-sm text-zinc-700 dark:text-zinc-300">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span>© <span id="year"></span> Maíz Urbano. Todos los derechos reservados.</span>
+            <span class="font-mono text-xs uppercase tracking-[0.25em] text-maiz-hoja">
+              Diseñado para Operación Callejera. Maíz Urbano System V.2025
+            </span>
+          </div>
         </div>
       </div>
     </footer>
 
+    <a
+      href="https://wa.me/525511223344?text=Hola%20quiero%20pedir"
+      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-maiz-amarillo px-4 py-3 text-xs font-heading uppercase tracking-widest text-maiz-negro shadow-glow transition hover:scale-105 hover:bg-maiz-dorado"
+      aria-label="Chatea en WhatsApp"
+    >
+      <span class="h-2 w-2 rounded-full bg-maiz-hoja"></span> WhatsApp
+    </a>
+
     <script>
       document.getElementById('year').textContent = new Date().getFullYear();
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const root = document.documentElement;
+          const isDark = root.classList.toggle('dark');
+          localStorage.setItem('maiz-theme', isDark ? 'dark' : 'light');
+        });
+      }
     </script>
   </body>
 </html>

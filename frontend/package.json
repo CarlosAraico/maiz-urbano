@@ -1,6 +1,7 @@
 {
   "name": "maiz-urbano-web",
   "version": "1.0.0",
+  "homepage": "https://CarlosAraico.github.io/maiz-urbano",
   "private": true,
   "type": "module",
   "scripts": {
