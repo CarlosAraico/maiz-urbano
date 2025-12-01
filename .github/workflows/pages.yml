@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -38,8 +38,8 @@ jobs:
           cd frontend/site
           npm run build
 
-      - name: Upload Build Artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/site/dist
 
@@ -48,9 +48,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
-        id: deploy
-        uses: actions/deploy-pages@v3
+        id: deployment
+        uses: actions/deploy-pages@v4
