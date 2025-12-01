@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MU-v4 — Design System Preview</title>
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/utilities.css" />
+    <style>
+      body{font-family:var(--font-body); background:var(--color-bg); color:var(--color-text);}
+      .grid{display:grid; gap:16px;}
+      .card{border:1px solid var(--border); border-radius:16px; padding:16px;}
+      .sw{height:72px; border:1px solid var(--border); border-radius:12px;}
+      .muted{opacity:.8}
+      .row{display:flex; gap:16px; align-items:center;}
+      .btn{background:var(--color-primary); color:#111; font-weight:700; padding:10px 14px; border-radius:10px; border:0; cursor:pointer;}
+    </style>
+    <script>
+      const stored = localStorage.getItem('maiz-theme');
+      const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored==='dark' || (!stored && prefersDark)) document.documentElement.classList.add('dark');
+    </script>
+  </head>
+  <body>
+    <header class="row" style="justify-content:space-between; padding:16px; border-bottom:1px solid var(--border)">
+      <div>
+        <h1 class="font-heading text-lg" style="margin:0">Maíz Urbano — Design System Preview</h1>
+        <div class="muted">MU-v4 · Light/Dark · Tokens → CSS</div>
+      </div>
+      <div class="row">
+        <a href="./" class="muted">Home</a>
+        <a href="./landing-v3_5.html" class="muted">Landing</a>
+        <a href="./mu-mount-preview.html" class="muted">Preview</a>
+        <button id="toggle" class="btn" style="margin-left:8px">Tema</button>
+      </div>
+    </header>
+
+    <main style="max-width:1100px; margin:24px auto; padding:0 16px">
+      <section class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Theme (activo)</h3>
+          <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+            <div>
+              <div class="sw bg-color-primary"></div>
+              <div class="muted">--color-primary</div>
+            </div>
+            <div>
+              <div class="sw bg-color-bg"></div>
+              <div class="muted">--color-bg</div>
+            </div>
+            <div>
+              <div class="sw" style="background:var(--color-text)"></div>
+              <div class="muted">--color-text</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Brand</h3>
+          <div class="grid" style="grid-template-columns:repeat(5,1fr)">
+            <div><div class="sw" style="background:var(--color-maiz-amarillo)"></div><div class="muted">amarillo</div></div>
+            <div><div class="sw" style="background:var(--color-maiz-dorado)"></div><div class="muted">dorado</div></div>
+            <div><div class="sw" style="background:var(--color-maiz-hoja)"></div><div class="muted">hoja</div></div>
+            <div><div class="sw" style="background:var(--color-maiz-crema)"></div><div class="muted">crema</div></div>
+            <div><div class="sw" style="background:var(--color-maiz-negro)"></div><div class="muted">negro</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Neutrals</h3>
+          <div class="grid" style="grid-template-columns:repeat(7,1fr)">
+            <div><div class="sw" style="background:var(--neutral-0)"></div><div class="muted">0</div></div>
+            <div><div class="sw" style="background:var(--neutral-50)"></div><div class="muted">50</div></div>
+            <div><div class="sw" style="background:var(--neutral-100)"></div><div class="muted">100</div></div>
+            <div><div class="sw" style="background:var(--neutral-200)"></div><div class="muted">200</div></div>
+            <div><div class="sw" style="background:var(--neutral-300)"></div><div class="muted">300</div></div>
+            <div><div class="sw" style="background:var(--neutral-700)"></div><div class="muted">700</div></div>
+            <div><div class="sw" style="background:var(--neutral-900)"></div><div class="muted">900</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:16px">
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Typography</h3>
+          <div class="font-heading text-lg">Heading · Archivo Black</div>
+          <div class="font-body">Body · Inter</div>
+          <div class="font-mono" style="margin-top:8px">Mono · JetBrains Mono</div>
+          <div style="margin-top:12px">
+            <div class="text-xs">Texto XS</div>
+            <div class="text-sm">Texto SM</div>
+            <div class="text-md">Texto MD</div>
+            <div class="text-lg">Texto LG</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Spacing</h3>
+          <div class="row"><div class="muted" style="width:120px">spacing-2</div><div class="sw" style="width:var(--spacing-2)"></div></div>
+          <div class="row"><div class="muted" style="width:120px">spacing-4</div><div class="sw" style="width:var(--spacing-4)"></div></div>
+          <div class="row"><div class="muted" style="width:120px">spacing-6</div><div class="sw" style="width:var(--spacing-6)"></div></div>
+          <div class="row"><div class="muted" style="width:120px">spacing-8</div><div class="sw" style="width:var(--spacing-8)"></div></div>
+        </div>
+      </section>
+
+      <section class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:16px">
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Buttons</h3>
+          <button class="btn">Primario</button>
+          <button class="btn" style="background:var(--neutral-200); margin-left:8px">Secundario</button>
+        </div>
+        <div class="card">
+          <h3 class="font-heading text-md" style="margin:0 0 12px">Card</h3>
+          <div class="card">
+            <div class="font-heading text-md">Título</div>
+            <div class="muted">Texto de soporte…</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById('toggle').addEventListener('click', () => {
+        const d = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('maiz-theme', d ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>

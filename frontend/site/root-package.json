@@ -1,0 +1,9 @@
+{
+  "name": "maiz-urbano",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens:css": "node tools/tokens-to-css.js design-tokens/mu-v4.json css/variables.css css/utilities.css"
+  }
+}

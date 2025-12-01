@@ -1,0 +1,41 @@
+.mu-footer {
+  background: #0b0b0b;
+  padding: 80px 0 40px;
+  color: white;
+}
+
+.mu-footer-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.mu-footer-brand {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.mu-footer-columns {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.mu-footer-columns h4 {
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.mu-footer-columns a {
+  display: block;
+  opacity: 0.75;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+
+.mu-footer-copy {
+  opacity: 0.5;
+  font-size: 14px;
+}

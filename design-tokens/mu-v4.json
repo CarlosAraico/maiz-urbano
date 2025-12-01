@@ -1,0 +1,76 @@
+{
+  "$schema": "https://tokens.studio/schemas/1.0.0/tokens.schema.json",
+  "Neutrals": {
+    "neutral-0": { "$type": "color", "$value": "#FFFFFF" },
+    "neutral-50": { "$type": "color", "$value": "#F7F7F7" },
+    "neutral-100": { "$type": "color", "$value": "#EDEDED" },
+    "neutral-200": { "$type": "color", "$value": "#D9D9D9" },
+    "neutral-300": { "$type": "color", "$value": "#C3C3C3" },
+    "neutral-700": { "$type": "color", "$value": "#333333" },
+    "neutral-900": { "$type": "color", "$value": "#111111" }
+  },
+  "Brand": {
+    "color-maiz-amarillo": { "$type": "color", "$value": "#FACC15" },
+    "color-maiz-dorado": { "$type": "color", "$value": "#FBBF24" },
+    "color-maiz-hoja": { "$type": "color", "$value": "#14532D" },
+    "color-maiz-crema": { "$type": "color", "$value": "#FDF7E3" },
+    "color-maiz-negro": { "$type": "color", "$value": "#0F0F0F" }
+  },
+  "Typography": {
+    "font-heading": { "$type": "fontFamily", "$value": "\"Archivo Black\", sans-serif" },
+    "font-mono": { "$type": "fontFamily", "$value": "\"JetBrains Mono\", monospace" },
+    "font-body": { "$type": "fontFamily", "$value": "Inter, sans-serif" },
+    "font-xs": { "$type": "dimension", "$value": "12px" },
+    "font-sm": { "$type": "dimension", "$value": "14px" },
+    "font-md": { "$type": "dimension", "$value": "16px" },
+    "font-lg": { "$type": "dimension", "$value": "20px" },
+    "font-xl": { "$type": "dimension", "$value": "24px" }
+  },
+  "Spacing": {
+    "spacing-0": { "$type": "dimension", "$value": "0px" },
+    "spacing-1": { "$type": "dimension", "$value": "4px" },
+    "spacing-2": { "$type": "dimension", "$value": "8px" },
+    "spacing-3": { "$type": "dimension", "$value": "12px" },
+    "spacing-4": { "$type": "dimension", "$value": "16px" },
+    "spacing-5": { "$type": "dimension", "$value": "20px" },
+    "spacing-6": { "$type": "dimension", "$value": "24px" },
+    "spacing-8": { "$type": "dimension", "$value": "32px" },
+    "spacing-10": { "$type": "dimension", "$value": "40px" }
+  },
+  "Theme": {
+    "color-primary": { "$type": "color", "$value": "{Brand.color-maiz-amarillo}" },
+    "color-bg": { "$type": "color", "$value": "{Neutrals.neutral-0}" },
+    "color-text": { "$type": "color", "$value": "{Neutrals.neutral-900}" },
+    "border": { "$type": "color", "$value": "{Neutrals.neutral-200}" }
+  },
+  "$themes": [
+    {
+      "name": "Light",
+      "selectedTokenSets": {
+        "Neutrals": "source",
+        "Brand": "enabled",
+        "Typography": "enabled",
+        "Spacing": "enabled",
+        "Theme": "enabled"
+      }
+    },
+    {
+      "name": "Dark",
+      "selectedTokenSets": {
+        "Neutrals": "source",
+        "Brand": "enabled",
+        "Typography": "enabled",
+        "Spacing": "enabled",
+        "Theme": "enabled"
+      },
+      "$overrides": {
+        "Theme": {
+          "color-primary": { "$value": "{Brand.color-maiz-dorado}" },
+          "color-bg": { "$value": "{Brand.color-maiz-negro}" },
+          "color-text": { "$value": "{Brand.color-maiz-crema}" },
+          "border": { "$value": "{Neutrals.neutral-700}" }
+        }
+      }
+    }
+  ]
+}

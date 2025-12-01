@@ -1,0 +1,7 @@
+node_modules
+dist
+build
+frontend/**/build
+frontend/**/dist
+*.local
+.env

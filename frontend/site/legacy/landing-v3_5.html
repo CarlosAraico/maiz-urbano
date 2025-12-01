@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Maíz Urbano – Fast-Casual de Identidad Mexicana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Tipografía -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+
+    <style>
+      :root {
+        --mu-bg: #050609;
+        --mu-bg-soft: #0d0f16;
+        --mu-gold: #f5c769;
+        --mu-gold-soft: rgba(245, 199, 105, 0.15);
+        --mu-border-gold: rgba(245, 199, 105, 0.28);
+        --mu-text-main: #f9fafb;
+        --mu-text-soft: rgba(249, 250, 251, 0.82);
+        --mu-card-bg: rgba(255, 255, 255, 0.03);
+        --mu-card-border: rgba(255, 255, 255, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at top, #111827 0, #02040a 55%);
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--mu-text-main);
+      }
+
+      main {
+        padding-top: 72px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        background: rgba(5, 6, 9, 0.58);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(245, 199, 105, 0.18);
+        z-index: 1000;
+        transition: background 0.3s ease, border-color 0.3s ease;
+      }
+
+      nav.scrolled {
+        background: rgba(5, 6, 9, 0.94);
+        border-bottom-color: rgba(245, 199, 105, 0.32);
+      }
+
+      nav .brand {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--mu-gold);
+      }
+
+      nav .nav-links {
+        display: flex;
+        gap: 26px;
+        font-size: 15px;
+      }
+
+      nav .nav-links a {
+        text-decoration: none;
+        opacity: 0.8;
+        position: relative;
+        padding-bottom: 2px;
+      }
+
+      nav .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 1px;
+        background: var(--mu-gold);
+        transition: width 0.2s ease;
+      }
+
+      nav .nav-links a:hover {
+        opacity: 1;
+      }
+
+      nav .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* LAYOUT GENERALES */
+      .mu-shell {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 120px 32px;
+      }
+
+      .mu-shell.compact {
+        padding-top: 90px;
+        padding-bottom: 90px;
+      }
+
+      .mu-section-title {
+        font-size: 38px;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+
+      .mu-section-subtitle {
+        font-size: 18px;
+        opacity: 0.85;
+        max-width: 680px;
+      }
+
+      .mu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .mu-card {
+        background: var(--mu-card-bg);
+        border-radius: 20px;
+        border: 1px solid var(--mu-card-border);
+        padding: 24px 22px;
+      }
+
+      .mu-card.gold {
+        border-color: var(--mu-border-gold);
+        background: radial-gradient(circle at top left, var(--mu-gold-soft), var(--mu-card-bg));
+      }
+
+      .mu-card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .mu-card-text {
+        font-size: 15px;
+        opacity: 0.82;
+      }
+
+      .mu-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        border: 1px solid rgba(249, 250, 251, 0.16);
+        opacity: 0.9;
+      }
+
+      /* HERO CINEMÁTICO */
+      .mu-hero-shell {
+        position: relative;
+        min-height: 85vh;
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+      }
+
+      .mu-hero-shell video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.45;
+        filter: saturate(1.1) contrast(1.05);
+        z-index: 0;
+      }
+
+      .mu-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to bottom, rgba(5, 6, 9, 0.75), rgba(5, 6, 9, 0.96)),
+          radial-gradient(circle at 10% 0, rgba(245, 199, 105, 0.32), transparent 55%),
+          radial-gradient(circle at 90% 10%, rgba(148, 163, 184, 0.2), transparent 55%);
+        z-index: 1;
+      }
+
+      .mu-hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 120px 32px 96px;
+        display: grid;
+        grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+        gap: 40px;
+        align-items: center;
+      }
+
+      .mu-hero-column-left {
+        max-width: 640px;
+      }
+
+      .mu-hero-kicker {
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        opacity: 0.78;
+        margin-bottom: 14px;
+      }
+
+      .mu-hero-title {
+        font-size: clamp(36px, 4vw, 52px);
+        font-weight: 800;
+        line-height: 1.05;
+        margin-bottom: 18px;
+      }
+
+      .mu-hero-highlight {
+        color: var(--mu-gold);
+      }
+
+      .mu-hero-text {
+        font-size: 18px;
+        opacity: 0.88;
+        margin-bottom: 26px;
+      }
+
+      .mu-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 16px;
+        margin-bottom: 24px;
+      }
+
+      .mu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid transparent;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.2s transform ease, 0.2s box-shadow ease, 0.2s background ease,
+          0.2s border-color ease, 0.2s color ease;
+      }
+
+      .mu-btn.primary {
+        background: linear-gradient(135deg, var(--mu-gold), #f59e0b);
+        color: #111827;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+      }
+
+      .mu-btn.primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 22px 60px rgba(0, 0, 0, 0.75);
+      }
+
+      .mu-btn.ghost {
+        background: transparent;
+        color: var(--mu-gold);
+        border-color: rgba(249, 250, 251, 0.2);
+      }
+
+      .mu-btn.ghost:hover {
+        border-color: var(--mu-gold);
+        background: rgba(249, 250, 251, 0.02);
+      }
+
+      .mu-hero-link {
+        font-size: 14px;
+        opacity: 0.85;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .mu-hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+      }
+
+      .mu-tag {
+        font-size: 11px;
+        padding: 6px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.75);
+      }
+
+      .mu-hero-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px 28px;
+      }
+
+      .mu-hero-metric {
+        min-width: 120px;
+      }
+
+      .mu-hero-metric-value {
+        display: block;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .mu-hero-metric-label {
+        display: block;
+        font-size: 13px;
+        opacity: 0.8;
+      }
+
+      .mu-hero-column-right {
+        align-self: stretch;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .mu-hero-panel {
+        width: 100%;
+        max-width: 360px;
+        background: rgba(15, 23, 42, 0.86);
+        border-radius: 24px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 20px 20px 16px;
+        backdrop-filter: blur(18px);
+      }
+
+      .mu-hero-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .mu-hero-panel-title {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .mu-hero-panel-pill {
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(249, 250, 251, 0.2);
+        opacity: 0.8;
+      }
+
+      .mu-hero-pills-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .mu-hero-panel-metric {
+        font-size: 13px;
+        opacity: 0.8;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+
+      /* SECCIONES ESPECÍFICAS */
+      .mu-section-dark {
+        background: radial-gradient(circle at top, #111827 0, #020617 60%);
+      }
+
+      .mu-section-soft {
+        background: linear-gradient(to bottom, #020617, #02040a);
+      }
+
+      .mu-section-divider {
+        height: 1px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(148, 163, 184, 0.5),
+          transparent
+        );
+        opacity: 0.4;
+      }
+
+      .mu-impact-grid .mu-card {
+        min-height: 120px;
+      }
+
+      .mu-text-small {
+        font-size: 14px;
+        opacity: 0.78;
+      }
+
+      .mu-badge-inline {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--mu-gold);
+        opacity: 0.85;
+      }
+
+      /* CONTENEDORES PARA COMPONENTES MU- SYSTEM */
+      .mu-section-mu-component {
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      @media (max-width: 900px) {
+        nav {
+          padding: 0 18px;
+        }
+        nav .nav-links {
+          display: none;
+        }
+
+        .mu-hero-inner {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 28px;
+          padding-top: 110px;
+          padding-bottom: 72px;
+        }
+
+        .mu-shell {
+          padding: 90px 20px;
+        }
+
+        .mu-section-title {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav id="mu-nav">
+      <span class="brand">Maíz Urbano</span>
+      <div class="nav-links">
+        <a href="#mu-menu-shell">Menú</a>
+        <a href="#mu-origen">Origen</a>
+        <a href="#mu-impacto">Impacto</a>
+        <a href="#mu-cedis">CEDIS</a>
+        <a href="#mu-inversion">Invertir</a>
+        <a href="#mu-empleo-shell">Empleo</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- HERO CINEMÁTICO + MU-HERO DENTRO -->
+      <section id="mu-hero-shell" class="mu-hero-shell">
+        <video autoplay muted loop playsinline>
+          <source src="https://cdn.coverr.co/videos/coverr-corn-field-4258/1080p.mp4" type="video/mp4" />
+        </video>
+        <div class="mu-hero-overlay"></div>
+
+        <div class="mu-hero-inner mu-animate">
+          <div class="mu-hero-column-left">
+            <div class="mu-hero-kicker">
+              MAÍZ URBANO / FAST-CASUAL DE IDENTIDAD MEXICANA
+            </div>
+            <h1 class="mu-hero-title">
+              El nuevo estándar de
+              <span class="mu-hero-highlight">antojitos de maíz criollo.</span>
+            </h1>
+            <p class="mu-hero-text">
+              Una marca mexicana de clase mundial que revaloriza el maíz criollo mediante
+              recetas profesionales, operación estandarizada y un modelo replicable para ciudades globales.
+              Elotes, esquites y panqués elevados a experiencia gastronómica moderna, eficiente y trazable.
+            </p>
+            <div class="mu-hero-actions">
+              <a href="#mu-menu-shell" class="mu-btn primary">Explorar menú</a>
+              <a href="#mu-inversion" class="mu-btn ghost">Modelo de franquicias</a>
+              <a href="#mu-empleo-shell" class="mu-hero-link">Oportunidades laborales</a>
+            </div>
+            <div class="mu-hero-tags">
+              <span class="mu-tag">Trazabilidad criolla</span>
+              <span class="mu-tag">Cocina estándar pro</span>
+              <span class="mu-tag">Fast-casual moderno</span>
+              <span class="mu-tag">Listo para expansión</span>
+            </div>
+            <div class="mu-hero-metrics">
+              <div class="mu-hero-metric">
+                <span class="mu-hero-metric-value">92%</span>
+                <span class="mu-hero-metric-label">Consistencia operativa</span>
+              </div>
+              <div class="mu-hero-metric">
+                <span class="mu-hero-metric-value">65–70%</span>
+                <span class="mu-hero-metric-label">Margen bruto</span>
+              </div>
+              <div class="mu-hero-metric">
+                <span class="mu-hero-metric-value">3</span>
+                <span class="mu-hero-metric-label">Sucursales piloto</span>
+              </div>
+              <div class="mu-hero-metric">
+                <span class="mu-hero-metric-value">90 s</span>
+                <span class="mu-hero-metric-label">Tiempo de servicio</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mu-hero-column-right">
+            <div class="mu-hero-panel">
+              <div class="mu-hero-panel-header">
+                <span class="mu-hero-panel-title">Snapshot operativo</span>
+                <span class="mu-hero-panel-pill">Sistema MU</span>
+              </div>
+              <div class="mu-hero-pills-row">
+                <span class="mu-tag">CEDIS central</span>
+                <span class="mu-tag">Recetas calibradas</span>
+                <span class="mu-tag">SOP replicables</span>
+              </div>
+              <div class="mu-hero-panel-metric">
+                <span>Unidades por módulo</span>
+                <span>250 / día</span>
+              </div>
+              <div class="mu-hero-panel-metric">
+                <span>Ticket promedio</span>
+                <span>$45 MXN</span>
+              </div>
+              <div class="mu-hero-panel-metric">
+                <span>Punto de equilibrio</span>
+                <span>mes 8</span>
+              </div>
+              <p class="mu-text-small" style="margin-top: 10px;">
+                Modelo diseñado para expansión nacional con franquicias, centros de producción regionales
+                y canales de delivery integrados.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenedor interno para el componente MUHero (si quieres usarlo) -->
+        <div id="mu-hero" style="display:none;"></div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- MENÚ PRINCIPAL (MU-MENU) -->
+      <section id="mu-menu-shell" class="mu-section-dark mu-shell mu-section-mu-component mu-animate">
+        <p class="mu-badge-inline">Menú insignia</p>
+        <h2 class="mu-section-title">Tres productos, un sistema completo.</h2>
+        <p class="mu-section-subtitle">
+          Elote montado, esquites salteados y panqué de elote. Tres productos diseñados
+          para alto margen, servicio rápido y operación estandarizada.
+        </p>
+        <div id="mu-menu"></div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- ORIGEN CRIOLLO -->
+      <section id="mu-origen" class="mu-section-soft mu-shell mu-animate">
+        <p class="mu-badge-inline">Origen criollo</p>
+        <h2 class="mu-section-title">Maíz que cuenta una historia.</h2>
+        <p class="mu-section-subtitle">
+          Trabajamos con maíces criollos de Tlaxcala y regiones cercanas para preservar sabor,
+          color y biodiversidad. La calle se vuelve vitrina de una cadena de valor completa.
+        </p>
+        <div class="mu-grid">
+          <div class="mu-card gold">
+            <div class="mu-card-title">Variedades nativas</div>
+            <p class="mu-card-text">
+              Blanco, amarillo, rojo, morado y azul, trabajados con técnicas de cocción profesional
+              (totomoxtle, tequesquite, tiempos calibrados).
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Relación con productores</div>
+            <p class="mu-card-text">
+              Compras directas, acuerdos de largo plazo y enfoque en sustentabilidad real,
+              no solo narrativa de marketing.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Identidad en cada vaso</div>
+            <p class="mu-card-text">
+              Cada elote y cada esquite expresa origen, técnica y estandarización. Tradición con lenguaje operativo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- IMPACTO SOCIAL -->
+      <section id="mu-impacto" class="mu-section-dark mu-shell mu-animate">
+        <p class="mu-badge-inline">Impacto social y ambiental</p>
+        <h2 class="mu-section-title">Modelo de triple impacto.</h2>
+        <p class="mu-section-subtitle">
+          Comer un elote en Maíz Urbano significa activar una cadena de valor que conecta campo,
+          ciudad y operación profesional.
+        </p>
+        <div class="mu-grid mu-impact-grid">
+          <div class="mu-card">
+            <div class="mu-card-title">Productores aliados</div>
+            <p class="mu-card-text">
+              Red en crecimiento de agricultores que mantienen vivo el maíz criollo. Pagos justos y
+              planeación de demanda.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Uso del totomoxtle</div>
+            <p class="mu-card-text">
+              Aprovechamiento del totomoxtle como parte del empaque y narrativa de la marca,
+              cerrando el ciclo con materiales biodegradables.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Educación y cultura</div>
+            <p class="mu-card-text">
+              Comunicación clara del origen del maíz y de la técnica, desde la calle pero con lenguaje y
+              ejecución profesional.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- TRAZABILIDAD -->
+      <section id="mu-trazabilidad" class="mu-section-soft mu-shell mu-animate">
+        <p class="mu-badge-inline">Trazabilidad</p>
+        <h2 class="mu-section-title">Del campo al módulo.</h2>
+        <p class="mu-section-subtitle">
+          Documentamos procesos, medimos variables críticas y traducimos recetas tradicionales
+          a fichas técnicas replicables.
+        </p>
+        <div class="mu-grid">
+          <div class="mu-card">
+            <div class="mu-card-title">Recetas calibradas</div>
+            <p class="mu-card-text">
+              Gramajes, tiempos de cocción, temperaturas y porciones definidos para garantizar
+              consistencia en cualquier punto de venta.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Datos operativos</div>
+            <p class="mu-card-text">
+              Tiempo de servicio, mermas, rotación de producto y rendimiento por lote bajo monitoreo continuo.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Auditoría de calidad</div>
+            <p class="mu-card-text">
+              Verificaciones cruzadas entre CEDIS y módulos para asegurar que el estándar se respete
+              sin importar la ubicación.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- CEDIS -->
+      <section id="mu-cedis" class="mu-section-dark mu-shell mu-animate">
+        <p class="mu-badge-inline">Operación centralizada</p>
+        <h2 class="mu-section-title">CEDIS: corazón operativo de Maíz Urbano.</h2>
+        <p class="mu-section-subtitle">
+          Un centro de producción diseñado para alimentar múltiples módulos con la misma calidad,
+          aprovechando economías de escala sin sacrificar sabor.
+        </p>
+        <div class="mu-grid">
+          <div class="mu-card gold">
+            <div class="mu-card-title">Producción profesional</div>
+            <p class="mu-card-text">
+              Cocción de elotes, preparación de bases de esquites y panqués bajo parámetros técnicos,
+              con control de temperatura y textura.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Cadena de frío</div>
+            <p class="mu-card-text">
+              Productos listos para terminar en módulo, manteniendo inocuidad y calidad sensorial.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Kit de módulo</div>
+            <p class="mu-card-text">
+              Cada módulo recibe producto, salsas, topping y materiales de servicio estandarizados,
+              listos para operar con mínima improvisación.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- INVERTIR -->
+      <section id="mu-inversion" class="mu-section-soft mu-shell mu-animate">
+        <p class="mu-badge-inline">Inversión</p>
+        <h2 class="mu-section-title">Por qué invertir en Maíz Urbano.</h2>
+        <p class="mu-section-subtitle">
+          Un antojito conocido, profesionalizado. Un modelo fast-casual con raíces profundas
+          y diseño operativo moderno.
+        </p>
+        <div class="mu-grid">
+          <div class="mu-card gold">
+            <div class="mu-card-title">Economía de unidades</div>
+            <p class="mu-card-text">
+              Margen bruto de 65–70% en productos de maíz, punto de equilibrio proyectado en el mes 8
+              y ticket promedio accesible para mercado masivo.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Escalabilidad</div>
+            <p class="mu-card-text">
+              Modelo replicable, compatible con sucursales propias, franquicias y alianzas
+              con operadores existentes.
+            </p>
+          </div>
+          <div class="mu-card">
+            <div class="mu-card-title">Diferenciador real</div>
+            <p class="mu-card-text">
+              Identidad basada en maíz criollo, no solo branding superficial. Producto, narrativa
+              y operación hablan el mismo idioma.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <!-- COMPONENTES MU: FRANQUICIAS, EMPLEO, SUCURSALES -->
+      <section id="mu-franquicias-shell" class="mu-section-dark mu-shell mu-section-mu-component mu-animate">
+        <div id="mu-franquicias"></div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <section id="mu-empleo-shell" class="mu-section-soft mu-shell mu-section-mu-component mu-animate">
+        <div id="mu-empleo"></div>
+      </section>
+
+      <div class="mu-section-divider"></div>
+
+      <section id="mu-sucursales-shell" class="mu-section-dark mu-shell mu-section-mu-component mu-animate">
+        <div id="mu-sucursales"></div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer id="mu-footer-shell" class="mu-section-soft mu-section-mu-component mu-animate">
+        <div class="mu-shell compact">
+          <div id="mu-footer"></div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- MONTAJE MU-SYSTEM -->
+    <script type="module" src="/src/landing-v3_5.js"></script>
+
+    <!-- ANIMACIONES GSAP -->
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Nav scroll
+      const nav = document.getElementById("mu-nav");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 60);
+      });
+
+      // Fade-up secciones
+      gsap.utils.toArray(".mu-animate").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 80%"
+            }
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

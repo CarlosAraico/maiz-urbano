@@ -1,0 +1,59 @@
+.mu-menu {
+  padding: 120px 0;
+  background: #0d0d0d;
+  color: white;
+}
+
+.mu-menu-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.mu-menu-title {
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.mu-menu-subtitle {
+  font-size: 20px;
+  opacity: 0.85;
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.mu-menu-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mu-menu-card {
+  padding: 32px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(254, 215, 102, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.mu-menu-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: rgba(255, 215, 128, 0.15);
+  border: 1px solid rgba(255, 215, 128, 0.25);
+  margin-bottom: 12px;
+}
+
+.mu-menu-item-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mu-menu-item-description {
+  font-size: 16px;
+  opacity: 0.85;
+  margin-top: 8px;
+}

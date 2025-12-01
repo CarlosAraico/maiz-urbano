@@ -1,0 +1,36 @@
+.mu-sucursales {
+  padding: 140px 0;
+  background: #0c0c0c;
+  color: white;
+}
+
+.mu-sucursales-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.mu-sucursales-title {
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.mu-sucursales-subtitle {
+  font-size: 20px;
+  opacity: 0.85;
+  margin-bottom: 48px;
+}
+
+.mu-sucursales-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mu-sucursales-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 215, 128, 0.25);
+  padding: 28px;
+  border-radius: 16px;
+}

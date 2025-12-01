@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Maíz Urbano – Landing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Fuentes + Tailwind opcional -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/utilities.css" />
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, sans-serif; background: var(--color-bg); color: var(--color-text); }
+      .hero {
+        background: radial-gradient(800px 300px at 20% 0%, rgba(250,204,21,.15), transparent 55%),
+                    radial-gradient(800px 300px at 80% 0%, rgba(20,83,45,.15), transparent 55%),
+                    var(--color-bg);
+      }
+      .nav.scrolled { backdrop-filter: blur(8px); background: color-mix(in oklab, var(--color-bg) 80%, transparent); }
+    </style>
+  </head>
+  <body>
+    <header id="mu-nav" class="nav sticky top-0 z-50 border-b border-[color:var(--border)]">
+      <div class="mx-auto max-w-6xl h-14 flex items-center justify-between px-4">
+        <a href="./" class="font-semibold">MU</a>
+        <nav class="flex gap-6 text-sm">
+          <a class="hover:underline" href="./">Home</a>
+          <a class="hover:underline" href="./mu-mount-preview.html">Preview</a>
+          <a class="hover:underline" href="https://github.com/CarlosAraico/maiz-urbano">Código</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <h1 class="mu-animate text-4xl md:text-5xl font-extrabold">Fast-Casual de Identidad Mexicana</h1>
+        <p class="mu-animate mt-4 max-w-2xl opacity-90">
+          Modelo operativo premium con tokens de diseño y despliegue en GitHub Pages.
+        </p>
+        <a class="mu-animate mt-8 inline-flex items-center rounded-md bg-[var(--color-primary)] px-5 py-2 text-black font-semibold" href="./">
+          Empezar
+        </a>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-16 grid md:grid-cols-3 gap-6">
+      <div class="mu-animate p-6 rounded-xl border border-[color:var(--border)]">Calidad</div>
+      <div class="mu-animate p-6 rounded-xl border border-[color:var(--border)]">Velocidad</div>
+      <div class="mu-animate p-6 rounded-xl border border-[color:var(--border)]">Identidad</div>
+    </section>
+
+    <!-- JS local con RUTA RELATIVA -->
+    <script type="module" src="./src/landing-v3_5.js"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install root deps
+        run: npm install
+
+      - name: Bootstrap workspaces
+        run: npm run bootstrap
+
+      - name: Build MU Mount
+        run: npm run build:mu
+
+      - name: Build Facturacion
+        run: npm run build:facturacion
+
+      - name: Run E2E tests
+        run: npx playwright test

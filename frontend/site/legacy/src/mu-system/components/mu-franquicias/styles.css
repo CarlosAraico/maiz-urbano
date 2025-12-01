@@ -1,0 +1,45 @@
+.mu-franquicias {
+  padding: 140px 0;
+  background: #0c0c0c;
+  color: white;
+}
+
+.mu-franquicias-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.mu-franquicias-title {
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.mu-franquicias-subtitle {
+  font-size: 20px;
+  opacity: 0.85;
+  max-width: 680px;
+  margin-bottom: 40px;
+}
+
+.mu-franquicias-list {
+  font-size: 18px;
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+.mu-franquicias-list li {
+  margin-bottom: 12px;
+}
+
+.mu-franquicias-cta {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #f7c86c;
+  color: #111;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+}
